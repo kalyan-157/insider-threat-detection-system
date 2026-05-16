@@ -1,0 +1,70 @@
+import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import ActivityLogs from "./pages/ActivityLogs";
+import ThreatAlerts from "./pages/ThreatAlerts";
+import Reports from "./pages/Reports";
+import Layout from "./components/Layout";
+
+function ProtectedRoute({ children }) {
+
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    return isLoggedIn ? children : <Navigate to="/" />;
+
+}
+
+function App() {
+
+    return (
+
+        <BrowserRouter>
+
+            <Routes>
+
+    <Route path="/" element={<Login />} />
+
+    <Route path="/login" element={<Login />} />
+
+    <Route
+        path="/dashboard"
+        element={
+            <ProtectedRoute>
+                <Dashboard />
+            </ProtectedRoute>
+        }
+    />
+
+    <Route
+        path="/activity-logs"
+        element={
+            <ProtectedRoute>
+                <ActivityLogs />
+            </ProtectedRoute>
+        }
+    />
+
+    <Route
+        path="/threat-alerts"
+        element={
+            <ProtectedRoute>
+                <ThreatAlerts />
+            </ProtectedRoute>
+        }
+    />
+
+    <Route
+        path="/reports"
+        element={
+            <ProtectedRoute>
+                <Reports />
+            </ProtectedRoute>
+        }
+    />
+
+</Routes>
+        </BrowserRouter>
+    );
+}
+
+export default App;

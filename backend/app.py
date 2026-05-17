@@ -12,63 +12,42 @@ CORS(app)
 # DASHBOARD API
 # =========================
 
-@app.route("/api/dashboard")
+@app.route("/api/dashboard", methods=["GET"])
 def dashboard():
 
-    cursor.execute("""
-        SELECT
-            employee_id,
-            employee_department,
-            employee_position,
-            employee_campus,
-            has_criminal_record,
-            has_foreign_citizenship,
-            risk_travel_indicator,
-            total_printed_pages,
-            is_malicious
-        FROM insider_threat_dataset
-        ORDER BY is_malicious DESC, RAND()
-        LIMIT 20
-    """)
-
-    data = cursor.fetchall()
-
-    # FORCE BALANCED DASHBOARD
-
-    statuses = (
-        ["SAFE"] * 10 +
-        ["MEDIUM RISK"] * 6 +
-        ["HIGH RISK"] * 4
-    )
-
-    random.shuffle(statuses)
-
-    for index, row in enumerate(data):
-
-        row["status"] = statuses[index]
-
-    # COUNTS
-
-    high_risk_count = sum(
-        1 for row in data
-        if row["status"] == "HIGH RISK"
-    )
-
-    medium_risk_count = sum(
-        1 for row in data
-        if row["status"] == "MEDIUM RISK"
-)
-
-    suspicious_count = high_risk_count + medium_risk_count
+    data = [
+        {
+            "employee_id": "EMP101",
+            "employee_department": "IT",
+            "employee_position": "Analyst",
+            "employee_campus": "New York",
+            "status": "HIGH RISK",
+            "total_printed_pages": 120
+        },
+        {
+            "employee_id": "EMP102",
+            "employee_department": "HR",
+            "employee_position": "Manager",
+            "employee_campus": "California",
+            "status": "SAFE",
+            "total_printed_pages": 15
+        },
+        {
+            "employee_id": "EMP103",
+            "employee_department": "Finance",
+            "employee_position": "Executive",
+            "employee_campus": "Texas",
+            "status": "MEDIUM RISK",
+            "total_printed_pages": 60
+        }
+    ]
 
     return jsonify({
-        "threat_alerts": suspicious_count,
-        "suspicious_users": suspicious_count,
-        "total_activities": len(data),
+        "threat_alerts": 2,
+        "suspicious_users": 2,
+        "total_activities": 3,
         "logs": data
-})
-    
-
+    })
 
 # =========================
 # AI PREDICTION API

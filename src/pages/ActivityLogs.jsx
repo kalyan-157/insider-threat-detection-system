@@ -18,7 +18,7 @@ function ActivityLogs() {
     useEffect(() => {
 
         axios
-            .get("https://insider-threat-detection-system-1.onrender.com")
+            .get("https://insider-threat-detection-system-1.onrender.com/api/dashboard")
 
             .then((response) => {
 

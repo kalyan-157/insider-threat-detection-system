@@ -9,7 +9,7 @@ function Reports() {
     useEffect(() => {
         let mounted = true;
         axios
-            .get("https://insider-threat-detection-system-1.onrender.com")
+            .get("https://insider-threat-detection-system-1.onrender.com/api/dashboard")
             .then((response) => {
                 if (mounted) setLogs(response.data.logs || []);
             })

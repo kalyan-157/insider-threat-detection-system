@@ -61,7 +61,7 @@ function Dashboard() {
     useEffect(() => {
         // DASHBOARD API
         axios
-            .get("https://insider-threat-detection-system-1.onrender.com")
+            .get("https://insider-threat-detection-system-1.onrender.com/api/dashboard")
             .then((response) => {
                 console.log(response.data);
                 setDashboardData(response.data);

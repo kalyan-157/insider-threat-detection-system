@@ -20,13 +20,12 @@ function Login() {
 
         try {
 
-            const response = await axios.post(
-            "https://insider-threat-detection-system-1.onrender.com/login",
+            const response = await axios.post("https://insider-threat-detection-system-1.onrender.com/api/dashboard")
     {
         username,
         password
     }
-);
+
 
             if (response.data.success) {
                 

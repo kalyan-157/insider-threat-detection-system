@@ -16,44 +16,45 @@ function Login() {
 
     const handleLogin = async (e) => {
 
-        e.preventDefault();
+    e.preventDefault();
 
-        try {
+    try {
 
-            const response = await axios.post("https://insider-threat-detection-system-1.onrender.com/api/dashboard")
-    {
-        username,
-        password
+        const response = await axios.post(
+            "https://insider-threat-detection-system-1.onrender.com/api/login",
+            {
+                username,
+                password
+            }
+        );
+
+        if (response.data.success) {
+
+            localStorage.setItem("isLoggedIn", "true");
+
+            setMessage("Login Successful");
+
+            navigate("/dashboard");
+
+        }
+
+        else {
+
+            setMessage("Invalid Username or Password");
+
+        }
+
     }
 
+    catch (error) {
 
-            if (response.data.success) {
-                
-                localStorage.setItem("isLoggedIn", "true");
+        console.log(error);
 
-                setMessage("Login Successful");
+        setMessage("Server Error");
 
-                navigate("/dashboard");
+    }
 
-}
-
-            else {
-
-                setMessage("Invalid Username or Password");
-
-            }
-
-        }
-
-        catch (error) {
-
-            console.log(error);
-
-            setMessage("Server Error");
-
-        }
-
-    };
+};
 
     return (
 

@@ -1,5 +1,5 @@
 from ml.predict import predict_threat
-from database.db_config import db, cursor
+from database.db_config import connection, cursor
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import random

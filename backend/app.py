@@ -97,40 +97,21 @@ def predict_ai_threat():
 @app.route("/api/login", methods=["POST"])
 def login():
 
-    data = request.get_json()
+        data = request.json
 
-    username = data["username"]
-    password = data["password"]
+        username = data.get("username")
+        password = data.get("password")
 
-    cursor.execute("""
+        if username == "admin" and password == "admin123":
 
-        SELECT * FROM users
-
-        WHERE username = %s
-        AND password = %s
-
-    """, (username, password))
-
-    user = cursor.fetchone()
-
-    if user:
-
-        return jsonify({
-
-            "success": True,
-            "message": "Login Successful"
-
+            return jsonify({
+            "success": True
         })
 
-    else:
-
         return jsonify({
-
-            "success": False,
-            "message": "Invalid Username or Password"
-
-        })
-
+        "success": False
+    })
+        
 
 # =========================
 # RUN FLASK

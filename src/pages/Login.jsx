@@ -22,8 +22,7 @@ function Login() {
 
             const response = await axios.post(
 
-                "https://insider-threat-detection-system-1.onrender.com",
-
+                https://insider-threat-detection-system-1.onrender.com/login
                 {
 
                     username,

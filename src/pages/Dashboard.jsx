@@ -46,17 +46,6 @@ function Dashboard() {
         suspicious_users: 0,
         total_activities: 0,
     });
-    <button
-
-    onClick={() => setSoundEnabled(true)}
-
-    className="btn btn-success mb-3"
-
->
-
-    Enable Alert Sound
-
-   </button>
 
     useEffect(() => {
         // DASHBOARD API
@@ -104,8 +93,7 @@ function Dashboard() {
             });
 
         // AI PREDICTION API
-        axios
-            .get("http://127.0.0.1:5000/api/predict-threat")
+            axios.get("https://insider-threat-detection-system-1.onrender.com/api/predict-threat")
             .then((response) => {
                 setAiPrediction(response.data);
             })
